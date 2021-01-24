@@ -14,7 +14,9 @@ jobs:
         run: pip install --requirement=requirements.txt
     
       - name: make html documentation
-        run: make html
+        run: |
+          make html
+          touch build/html/.nojekyll
           
       - name: deploy to github pages
         if: ${{ github.event_name == 'push' }}
