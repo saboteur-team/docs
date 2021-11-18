@@ -14,6 +14,7 @@ nav:
       - LooseFiles: 'game/formats/loosefiles.md'
       - Megapack/Kilopack: 'game/formats/megapack.md'
     - Lua: 'game/lua/index.md'
+    - Versions: 'game/versions.md'
   - Tools:
     - Index: 'tools/index.md'
     - SabTool: 'tools/sabtool.md'
