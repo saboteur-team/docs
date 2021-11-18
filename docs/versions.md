@@ -1,4 +1,7 @@
+# Versions
+
 For PC, there is several versions of game (executable) available:
+
 - Retail Release - v1.0.0.1 - contains SecuROM DRM
 - Skidrow Crack for Retail Release - v1.0.0.1 - removes SecuROM DRM from the Retail executable and also extracts some files which are bundled into the .exe
 - Origin Version - ???
