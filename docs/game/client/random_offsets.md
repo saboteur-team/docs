@@ -1,11 +1,12 @@
 # Offsets
 
-*NOTE: Needs to be cleaned*
+NOTE: Needs to be cleaned
 
-*All offsets are for GOG and for SKIDROW crack*
+All offsets are for GOG and for SKIDROW crack
 
 **gamiee:**
-```
+
+```text
 0x754040 - probably function to define functions in native Lua functions
 0x753B20 - require lua func
 0x9CCF30 - WSLoadDisplayManager::Update_Display - Renders main menu 
@@ -15,6 +16,7 @@
 ```
 
 **Dan:**
+
 ```cpp
 // Camera mode settings:
 // 00000000: Normal (Follows player)
@@ -27,6 +29,7 @@
 **Igoh:**
 
 all together should remove all the peds on the map
+
 ```cpp
     Unprotect(0x9cccac, 1);
     *(BYTE *)0x9cccac = 0xeb;
@@ -66,7 +69,9 @@ all together should remove all the peds on the map
     Unprotect(0x461AC5, 1);
     *(BYTE *)0x461AC5 = 0xeb;
 ```
+
 ped pool
+
 ```cpp
     DWORD *pedPool = *(DWORD **)(*(DWORD *)0x14a9ce0 + 0x34);
     for (; pedPool; pedPool = *(DWORD**)pedPool)
@@ -90,12 +95,14 @@ ped pool
         pChatWindow->AddDebugMessage("Ped: 0x%p (bb: 0x%p, b: 0x%p), pos: %f %f %f %f", _ped, _baseBegin, _baseR, x, y, z, rot);
     }
 ```
+
 ```cpp
 void CGame::ShowMinimap(BYTE bToggle)
 {
     *(BYTE *)(*(DWORD *)(*(DWORD *)0x14a9b14 + 0x8c) + 0x35) = bToggle;
 }
 ```
+
 ```cpp
 unsigned __int16 CGame::GetTime()
 {
@@ -110,6 +117,7 @@ unsigned __int16 CGame::GetTime()
     return *(unsigned __int16 *)result;
 }
 ```
+
 ```cpp
 void CGame::SetTime(int bHour, int bMinute)
 {
@@ -125,6 +133,7 @@ void CGame::SetTime(int bHour, int bMinute)
     *(float *)(*(DWORD *)0x14941EC + 0x40) = time;
 }
 ```
+
 ```cpp
 void CGame::SetWTFMode(BOOL bToggle)
 {
@@ -134,16 +143,20 @@ void CGame::SetWTFMode(BOOL bToggle)
     *(DWORD *)(*(DWORD *)0x147dcac + 0x90) = bToggle ? 2863311360 : 2863311361;
 }
 ```
+
 current HP:
+
 ```cpp
 *(float *)(*(DWORD *)0x123f8b8 + 0x3fc)
 ```
+
 ```cpp
 void CGame::FreezeTime(BOOL bToggle)
 {
     *(float *)(*(DWORD *)0x14941EC + 0x1c) = bToggle ? 0 : 12;
 }
 ```
+
 ```cpp
 void CGame::SetCameraMatrix(MATRIX4X4 matPos)
 {
@@ -159,14 +172,19 @@ void CGame::SetCameraMatrix(MATRIX4X4 matPos)
     *(__int16 *)0x004376C0 = -15989;
 }
 ```
+
 mainwnd:
+
 ```cpp
 *(HWND *)0x120F458
 ```
+
 is paused vel in menu:
+
 ```cpp
 *(DWORD *)0x14d6d38 == 0x200;
 ```
+
 ```cpp
 // Disable global suspicion
 Unprotect(0x11bb674, 1);
@@ -174,6 +192,7 @@ Unprotect(0x11bb674, 1);
 Unprotect(0x45DCBD, 1);
 *(BYTE *)0x45DCBD = 0;
 ```
+
 ```cpp
 // Install OnDeath hook
 InstallJmpHook(0x5B7DEB, (DWORD)OnDeath);
@@ -195,46 +214,57 @@ void __declspec(naked) OnDeath()
     }
 }
 ```
+
 ```cpp
 // fade in, last argument is float how long it will take to fade the screen
 DWORD dwColor = 255 | ((255 | ((255 | (255 << 8)) << 8)) << 8);
 ((void(__fastcall*)(DWORD, DWORD, DWORD, float))0x9bc170)(*(DWORD *)0x14A9B14, 0, dwColor, 0);
 ```
+
 ```cpp
 // sets bird density
 *(BYTE *)(*(DWORD *)0x12102d0 + 0x67e4) = 254;
 ```
+
 ```cpp
 // togle birds
 *(BYTE *)(*(DWORD *)0x12102d0 + 0x67e5) = bToggle ? 168 : 160;
 ```
+
 ```cpp
 // toggle mini zep
 *(BYTE *)(*(DWORD *)0x143d958 + 0xec) = bToggle ? 166 : 160;
 ```
+
 ```cpp
 // sets drunk level
 *(float *)(*(DWORD *)0x143d02c + 0x28) = fDrunk;
 ```
+
 ```cpp
 // force camera behind player, 167 disables moving camera
 *(BYTE *)(*(DWORD *)0x1494360 + 0x10c60) = 168;
 ```
+
 ```cpp
 // game speed
 *(float *)0x14e1c6c = 1000;
 ```
+
 ```cpp
 // death state
 *(BYTE *)(*(DWORD *)0x123f8b8 + 0xa98) = 0;
 ```
+
 ```cpp
 // disables falling sounds
 jmp at 0x54EFE1
 ```
+
 ```cpp
 0x9E8D20 // func which displays stats menu, has all struct offsets listed with names
 ```
+
 ```cpp
 0x14AADCC - struct pointer
 
@@ -274,18 +304,22 @@ typedef struct _STATS {
     // and keeps goin
 } STATS;
 ```
+
 ```cpp
 // prevents menu open 0 enables it bck
 *(BYTE *)0x1240545 = 1;
 ```
+
 ```cpp
 *(BYTE *)(*(DWORD *)0x120F5C4 + 0x3fdfd) = 1; // disables load & save buttons in menu
 // or
 *(BYTE *)0x7a4346 = 0xeb; // disables for good
 ```
+
 ```cpp
 *(__int16 *)0x5C136B = 16619; // disables quickload from button
 ```
+
 ```cpp
 *(BYTE *)0x4365bc = 0xc3; // disables quicksave from button (disable it after character spawned, otherwise game won't get through start loading)
 ```

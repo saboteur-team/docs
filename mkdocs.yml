@@ -1,2 +1,19 @@
 site_name: Saboteur Team Wiki
 theme: readthedocs
+nav:
+  - Home: index.md
+  - Game:
+    - Index: 'game/index.md'
+    - Client:
+      - Index: 'game/client/index.md'
+      - Random Offsets: 'game/client/random_offsets.md'
+    - Crc: 'game/crc.md'
+    - Filesystem: 'game/filesystem.md'
+    - File formats:
+      - Index: 'game/formats/index.md'
+      - LooseFiles: 'game/formats/loosefiles.md'
+      - Megapack/Kilopack: 'game/formats/megapack.md'
+    - Lua: 'game/lua/index.md'
+  - Tools:
+    - Index: 'tools/index.md'
+    - SabTool: 'tools/sabtool.md'
