@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>Megapack/Kilopack - Saboteur Team Wiki</title>
+  <title>GameText - Saboteur Team Wiki</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Megapack/Kilopack";
-    var mkdocs_page_input_path = "game/formats/megapack.md";
+    var mkdocs_page_name = "GameText";
+    var mkdocs_page_input_path = "game/formats/gametext.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -72,21 +72,17 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../loosefiles/">LooseFiles</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Megapack/Kilopack</a>
+                <li class="toctree-l2"><a class="reference internal" href="../megapack/">Megapack/Kilopack</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">GameText</a>
     <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#detail">Detail</a>
+    <li class="toctree-l3"><a class="reference internal" href="#kaitai-script-for-pc-versions-gametextdlg">Kaitai script for PC Version's GameText.dlg</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#formats">Formats</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#entry-header">Entry Header</a>
+    <li class="toctree-l3"><a class="reference internal" href="#kaitai-script-for-xbox-2008-beta-versions-gametextdlg">Kaitai script for Xbox 2008 beta Version's GameText.dlg</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#file">File</a>
-    </li>
-        </ul>
+    <li class="toctree-l3"><a class="reference internal" href="#todo">TODO</a>
     </li>
     </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../gametext/">GameText</a>
                 </li>
     </ul>
                     </li>
@@ -131,7 +127,7 @@
         
       
     
-    <li>Megapack/Kilopack</li>
+    <li>GameText</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -143,154 +139,122 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="megapack-kilopack">Megapack / Kilopack</h1>
-<h2 id="detail">Detail</h2>
-<p>The megapack file is just an archive file for storing different kind of assets. A megapack (or kilopack) stores pack files inside them. Different megapacks store different kind and amount of data.</p>
-<p>The data stored in megapacks can be:</p>
+                <h1 id="gametextdlg">GameText.dlg</h1>
+<p><code>GameText.dlg</code> is file which contains various text strings for cutscenes, help texts etc. On PC version, you can find this file in <code>The Saboteur\Cinematics\Dialog\(Language)\GameText.dlg</code>.</p>
+<p>The format is quite easy and can be find out even without reverse engineering (that's how is the current Kaitai script made, but there are some things missing. Check <a href="#todo">TODO</a>).</p>
+<p>Some notes:</p>
 <ul>
-<li>Models<ul>
-<li>Meshes</li>
-<li>Physics data</li>
-<li>Textures</li>
-<li>TODO: more</li>
+<li>On Xbox version (2008 beta build) all integers are in big endian, on PC version they are little endian.</li>
+<li>The tag type is not string but integer, so on PC it's <code>TXTD</code>, on Xbox it's <code>DTXT</code></li>
 </ul>
-</li>
-</ul>
-<p>The megapack file format is a simple one: all the pack files are packed together inside a big file with a header specifying (for each file) the name, where they start and how big they are.</p>
-<h2 id="formats">Formats</h2>
-<h3 id="entry-header">Entry Header</h3>
-<table>
-<thead>
-<tr>
-<th>Offset</th>
-<th>Size</th>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>4</td>
-<td><a href="../../crc/">Crc</a></td>
-<td>Id</td>
-<td>File name's Crc</td>
-</tr>
-<tr>
-<td>4</td>
-<td>4</td>
-<td><a href="../../crc/">Crc</a></td>
-<td>Path</td>
-<td>File path's Crc</td>
-</tr>
-<tr>
-<td>8</td>
-<td>4</td>
-<td>u32</td>
-<td>Size</td>
-<td>File size</td>
-</tr>
-<tr>
-<td>12</td>
-<td>8</td>
-<td>u64</td>
-<td>Offset</td>
-<td>File offset inside the megapack</td>
-</tr>
-</tbody>
-</table>
-<h3 id="file">File</h3>
-<table>
-<thead>
-<tr>
-<th>Offset</th>
-<th>Size</th>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>4</td>
-<td>FourCC</td>
-<td>Magic</td>
-<td>The file's magic number "MP00"</td>
-</tr>
-<tr>
-<td>4</td>
-<td>4</td>
-<td>u32</td>
-<td>File count</td>
-<td>The number of embedded pack files</td>
-</tr>
-<tr>
-<td>8</td>
-<td>20</td>
-<td><a href="#entry-header">Entry header</a>[]</td>
-<td>File entries</td>
-<td>The header entries for the pack files</td>
-</tr>
-<tr>
-<td>8 + 20*Count</td>
-<td>8</td>
-<td>[<a href="../../crc/">Crc</a>, <a href="../../crc/">Crc</a>]</td>
-<td>Unk ids</td>
-<td>Unknown array containing <a href="../../crc/">Crc</a> pairs</td>
-</tr>
-<tr>
-<td>8 + 28*Count</td>
-<td>Varying</td>
-<td>byte[]</td>
-<td>File data</td>
-<td>Offset is padded to 0x800 byte boundary</td>
-</tr>
-</tbody>
-</table>
-<p><a href="http://kaitai.io/">Kaitai</a> structure definition:</p>
+<h2 id="kaitai-script-for-pc-versions-gametextdlg">Kaitai script for PC Version's <code>GameText.dlg</code></h2>
 <pre><code class="language-yaml">meta:
-  id: megapack
-  file-extension:
-    - megapack
-    - kilopack
+  id: dlg
+  title: Saboteur Dialog File
+  file-extension: dlg
   endian: le
+
 seq:
-  - id: magic
-    contents: &quot;00PM&quot;
-  - id: file_entry_count
-    type: u4
-  - id: file_entries
-    type: file_entry
-    repeat: expr
-    repeat-expr: file_entry_count
-  - id: crc_pairs
-    type: crc_pair
-    repeat: expr
-    repeat-expr: file_entry_count
+  - id: header
+    type: header
+  - id: entries
+    type: entry
+    repeat: eos
+
 types:
-  file_entry:
+  header:
     seq:
-      - id: crc
+      - id: version
         type: u4
-      - id: unk_crc
+      - id: entries_count
         type: u4
-      - id: size
-        type: u4
-      - id: offset
-        type: u8
-    instances:
-      data:
-        pos: offset
-        size: size
-  crc_pair:
+      - id: unknown2
+        size: 4
+  entry:
     seq:
-      - id: crc1
-        type: u4
-      - id: crc2
-        type: u4
+      - id: tag_type
+        type: str
+        encoding: ASCII
+        size: 4
+      - id: body
+        type:
+          switch-on: tag_type
+          cases:
+            '&quot;TXTD&quot;': dtxt_entry
+  dtxt_entry:
+    seq:
+      - id: hash
+        size: 4
+      - id: key_size
+        type: u2
+      - id: key
+        type: str
+        encoding: ASCII
+        size: key_size
+      - id: value_size
+        type: u2
+      - id: value
+        type: str
+        encoding: UTF-16LE
+        size: value_size*2
 </code></pre>
+<h2 id="kaitai-script-for-xbox-2008-beta-versions-gametextdlg">Kaitai script for Xbox 2008 beta Version's <code>GameText.dlg</code></h2>
+<pre><code class="language-yaml">meta:
+  id: dlg
+  title: Saboteur Dialog File
+  file-extension: dlg
+  endian: be
+
+seq:
+  - id: header
+    type: header
+  - id: entries
+    type: entry
+    repeat: eos
+
+types:
+  header:
+    seq:
+      - id: version
+        type: u4
+      - id: entries_count
+        type: u4
+      - id: unknown2
+        size: 4
+  entry:
+    seq:
+      - id: tag_type
+        type: str
+        encoding: ASCII
+        size: 4
+      - id: body
+        type:
+          switch-on: tag_type
+          cases:
+            '&quot;DTXT&quot;': dtxt_entry
+  dtxt_entry:
+    seq:
+      - id: hash
+        size: 4
+      - id: key_size
+        type: u2
+      - id: key
+        type: str
+        encoding: ASCII
+        size: key_size
+      - id: value_size
+        type: u2
+      - id: value
+        type: str
+        encoding: ASCII
+        size: value_size
+</code></pre>
+<h2 id="todo">TODO</h2>
+<ul>
+<li>In PC Release version, there are multiple <code>CEND</code> (<code>DNEC</code>) tags, and mostly between them are 8 bytes of something (and in one case 600+ bytes (offset <code>0xD988D</code> on PC Release English GameText.dlg)). It seems to have some structure, although it needs to be Reversed to find out.</li>
+<li>Hash is in weird format, also, it's not 100% confirmed if it's hash or ID (String <code>Return contraband</code> have same hash on PC Release and on Xbox 2008 beta version <code>b05ad4a</code>)</li>
+<li>Find out purposes of unknown properties</li>
+</ul>
               
             </div>
           </div>
@@ -298,10 +262,10 @@ types:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../gametext/" class="btn btn-neutral float-right" title="GameText">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../lua/" class="btn btn-neutral float-right" title="Lua">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../loosefiles/" class="btn btn-neutral" title="LooseFiles"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../megapack/" class="btn btn-neutral" title="Megapack/Kilopack"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -327,10 +291,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../loosefiles/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../megapack/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../gametext/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../lua/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
