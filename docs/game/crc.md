@@ -30,6 +30,6 @@ public static uint FNV32string(string source, int maxLen = -1)
 }
 ```
 
-The [SabTool](../tools.md#SabTool) tool can calculate, bruteforce and look
+The [SabTool](../tools/sabtool.md#SabTool) tool can calculate, bruteforce and look
 up hashes (from a hash to string lookup file, that was manually created
 for this purpose).
