@@ -1,6 +1,6 @@
 # GameText.dlg
 
-`GameText.dlg` is file which contains various text strings for cutscenes, help texts and etc... On PC version, you can find this file in `(Game Root)\Cinematics\Dialog\(Language)\GameText.dlg`.
+`GameText.dlg` contains various text strings for cutscenes, help texts and etc... On the PC version, you can find this file at `(Game Root)\Cinematics\Dialog\(Language)\GameText.dlg`.
 
 ## [Kaitai](http://kaitai.io/) Formats
 
@@ -66,9 +66,9 @@ types:
         type: u4
 ```
 
-### Xbox 360 2008 beta Version
+### Xbox 360 2008 beta
 
-Note: All integers are in big endian, on PC version they are little endian.
+Note: All integers are in big endian! On the PC version they are little endian.
 
 ```yaml
 meta:
@@ -89,8 +89,8 @@ types:
         type: u4
       - id: entries_count
         type: u4
-      - id: unknown2
-        size: 4
+      - id: total_char_count
+        type: u4
   entry:
     seq:
       - id: tag_type
