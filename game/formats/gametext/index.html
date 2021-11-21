@@ -76,7 +76,7 @@
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#pc">PC</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#xbox-360-2008-beta-version">Xbox 360 2008 beta Version</a>
+    <li class="toctree-l4"><a class="reference internal" href="#xbox-360-2008-beta">Xbox 360 2008 beta</a>
     </li>
         </ul>
     </li>
@@ -142,7 +142,7 @@
             <div class="section">
               
                 <h1 id="gametextdlg">GameText.dlg</h1>
-<p><code>GameText.dlg</code> is file which contains various text strings for cutscenes, help texts and etc... On PC version, you can find this file in <code>(Game Root)\Cinematics\Dialog\(Language)\GameText.dlg</code>.</p>
+<p><code>GameText.dlg</code> contains various text strings for cutscenes, help texts and etc... On the PC version, you can find this file at <code>(Game Root)\Cinematics\Dialog\(Language)\GameText.dlg</code>.</p>
 <h2 id="kaitai-formats"><a href="http://kaitai.io/">Kaitai</a> Formats</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
@@ -203,8 +203,8 @@ types:
       - id: offset
         type: u4
 </code></pre>
-<h3 id="xbox-360-2008-beta-version">Xbox 360 2008 beta Version</h3>
-<p>Note: All integers are in big endian, on PC version they are little endian.</p>
+<h3 id="xbox-360-2008-beta">Xbox 360 2008 beta</h3>
+<p>Note: All integers are in big endian! On the PC version they are little endian.</p>
 <pre><code class="language-yaml">meta:
   id: dlg
   title: Saboteur Dialog File
@@ -223,8 +223,8 @@ types:
         type: u4
       - id: entries_count
         type: u4
-      - id: unknown2
-        size: 4
+      - id: total_char_count
+        type: u4
   entry:
     seq:
       - id: tag_type
