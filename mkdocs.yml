@@ -11,9 +11,9 @@ nav:
     - Filesystem: 'game/filesystem.md'
     - File formats:
       - Index: 'game/formats/index.md'
+      - GameText: 'game/formats/gametext.md'
       - LooseFiles: 'game/formats/loosefiles.md'
       - Megapack/Kilopack: 'game/formats/megapack.md'
-      - GameText: 'game/formats/gametext.md'
     - Lua: 'game/lua/index.md'
     - Versions: 'game/versions.md'
   - Tools:

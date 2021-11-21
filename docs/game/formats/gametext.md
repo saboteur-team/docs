@@ -1,69 +1,74 @@
 # GameText.dlg
 
-`GameText.dlg` is file which contains various text strings for cutscenes, help texts etc. On PC version, you can find this file in `The Saboteur\Cinematics\Dialog\(Language)\GameText.dlg`.
+`GameText.dlg` is file which contains various text strings for cutscenes, help texts and etc... On PC version, you can find this file in `(Game Root)\Cinematics\Dialog\(Language)\GameText.dlg`.
 
-The format is quite easy and can be find out even without reverse engineering (that's how is the current Kaitai script made, but there are some things missing. Check [TODO](#todo)).
+## [Kaitai](http://kaitai.io/) Formats
 
-Some notes:
-
-- On Xbox version (2008 beta build) all integers are in big endian, on PC version they are little endian.
-- The tag type is not string but integer, so on PC it's `TXTD`, on Xbox it's `DTXT`
-
-## Kaitai script for PC Version's `GameText.dlg`
+### PC
 
 ```yaml
 meta:
-  id: dlg
-  title: Saboteur Dialog File
+  id: saboteur_dialog_text
+  title: Saboteur Dialog Text File
   file-extension: dlg
   endian: le
-  
 seq:
-  - id: header
-    type: header
-  - id: entries
-    type: entry
-    repeat: eos
-    
+  - id: version
+    type: u4
+  - id: base_entries
+    type: entry_array
+  - id: sub_entry_count
+    type: u4
+  - id: sub_entry_arrays
+    type: sub_entry
+    repeat: expr
+    repeat-expr: sub_entry_count
+  - id: sub_arrays
+    type: entry_array
+    repeat: expr
+    repeat-expr: sub_entry_count
 types:
-  header:
+  entry_array:
     seq:
-      - id: version
+      - id: entry_count
         type: u4
-      - id: entries_count
+      - id: total_char_count
         type: u4
-      - id: unknown2
-        size: 4
-  entry:
-    seq:
-      - id: tag_type
-        type: str
-        encoding: ASCII
-        size: 4
-      - id: body
-        type:
-          switch-on: tag_type
-          cases:
-            '"TXTD"': dtxt_entry
+      - id: entries
+        type: dtxt_entry
+        repeat: expr
+        repeat-expr: entry_count
+      - id: end
+        contents: "DNEC"
   dtxt_entry:
     seq:
-      - id: hash
-        size: 4
-      - id: key_size
+      - id: tag
+        contents: "TXTD"
+      - id: id
+        type: u4
+      - id: voice_over_key_size
         type: u2
-      - id: key
+      - id: voice_over
         type: str
-        encoding: ASCII
-        size: key_size
-      - id: value_size
+        encoding: UTF-8
+        size: voice_over_key_size
+      - id: text_size
         type: u2
-      - id: value
+      - id: text
         type: str
-        encoding: UTF-16LE
-        size: value_size*2
+        encoding: UTF-16
+        size: text_size * 2
+  sub_entry:
+    seq:
+      - id: id
+        type: u4
+      - id: offset
+        type: u4
 ```
 
-## Kaitai script for Xbox 2008 beta Version's `GameText.dlg`
+### Xbox 360 2008 beta Version
+
+Note: All integers are in big endian, on PC version they are little endian.
 
 ```yaml
 meta:
@@ -71,14 +76,12 @@ meta:
   title: Saboteur Dialog File
   file-extension: dlg
   endian: be
-  
 seq:
   - id: header
     type: header
   - id: entries
     type: entry
     repeat: eos
-    
 types:
   header:
     seq:
@@ -116,9 +119,3 @@ types:
         encoding: ASCII
         size: value_size
 ```
-
-## TODO
-
-- In PC Release version, there are multiple `CEND` (`DNEC`) tags, and mostly between them are 8 bytes of something (and in one case 600+ bytes (offset `0xD988D` on PC Release English GameText.dlg)). It seems to have some structure, although it needs to be Reversed to find out.
-- Hash is in weird format, also, it's not 100% confirmed if it's hash or ID (String `Return contraband` have same hash on PC Release and on Xbox 2008 beta version `b05ad4a`)
-- Find out purposes of unknown properties
