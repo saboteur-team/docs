@@ -89,13 +89,13 @@ types:
         type: f4
       - id: m21
         type: f4
-      - id: m22
+      - id: y_scale
         type: f4
       - id: m23
         type: f4
       - id: m24
         type: f4
-      - id: m31
+      - id: z_scale
         type: f4
       - id: m32
         type: f4
