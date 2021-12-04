@@ -36,7 +36,7 @@
 |France.trigs||
 |France.waterctrl||
 |France.waterflow||
-|France_FSM.info||
+|France_FSM.info|[FSM file](formats/france_fsm.md) which defines locations for each far scene monument in the game world.|
 |France_FST.info||
 |InputTemplates.txt||
 |LuaScripts.luap|Compiled & packaged lua scripts|
