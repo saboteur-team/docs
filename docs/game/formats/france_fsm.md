@@ -6,6 +6,8 @@ When monument buildings are too far to render normally, they are replaced with l
 The format contains an array of monument entries defining a CRC hash to represent the name of the 3D model to be used and 3D transform information for the position and scale of it on the map.
 As an example for the CRC, the entry for the Eifel tower has `0x1E821A55`, which maps to the model name: `FFS_MN_A07_Eifel_Tower`.
 
+The position of each monument is controlled by a 4x4 affine [transformation matrix](https://www.brainvoyager.com/bv/doc/UsersGuide/CoordsAndTransforms/SpatialTransformationMatrices.html), where `m11`, `m22`, and `m33` are the column vector controlling the scale of the monument. This allows adjusting where the monument will be placed in the far scene as well as the size of it.
+
 ## [Kaitai](http://kaitai.io/) Formats
 
 ### PC
@@ -83,19 +85,19 @@ types:
         type: f4
       - id: m12
         type: f4
-      - id: x_scale
+      - id: m13
         type: f4
       - id: m14
         type: f4
       - id: m21
         type: f4
-      - id: y_scale
+      - id: m22
         type: f4
       - id: m23
         type: f4
       - id: m24
         type: f4
-      - id: z_scale
+      - id: m31
         type: f4
       - id: m32
         type: f4
@@ -103,11 +105,11 @@ types:
         type: f4
       - id: m34
         type: f4
-      - id: x_pos
+      - id: m41
         type: f4
-      - id: y_pos
+      - id: m42
         type: f4
-      - id: z_pos
+      - id: m43
         type: f4
       - id: m44
         type: f4
