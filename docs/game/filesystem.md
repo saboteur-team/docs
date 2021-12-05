@@ -37,7 +37,7 @@
 |France.waterctrl||
 |France.waterflow||
 |France_FSM.info|[FSM file](formats/france_fsm.md) which defines locations for each far scene monument in the game world.|
-|France_FST.info||
+|France_FST.info|[FST file](formats/france_fst.md) which defines the far scene terrain positioning in the game world and other terrain properties.|
 |InputTemplates.txt||
 |LuaScripts.luap|Compiled & packaged lua scripts|
 |ModelInfo.txt||
