@@ -15,6 +15,7 @@ nav:
       - LooseFiles: 'game/formats/loosefiles.md'
       - Megapack/Kilopack: 'game/formats/megapack.md'
       - France FSM: 'game/formats/france_fsm.md'
+      - France FST: 'game/formats/france_fst.md'
     - Lua: 'game/lua/index.md'
     - Versions: 'game/versions.md'
   - Tools:
