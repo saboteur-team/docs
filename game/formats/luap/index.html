@@ -125,6 +125,9 @@
               
                 <h1 id="luascriptsluap">LuaScripts.luap</h1>
 <p><code>LuaScripts.luap</code> contains compiled lua scripts containing the game logic. On the PC version, you can find this file at <code>(Game Root)\LuaScripts.luap</code>.</p>
+<p>The path and name Crcs are easy to calculate. Let's say the file to be included in the package is: <code>Scripts\Experimental\AttackAction.lua</code>. The compiled version of it is at the same path, but with the extension <code>luac</code>. To calculate the path Crc, the prefix <code>d:\</code> must be prepended to that path. So the path Crc will be calculated from: <code>d:\Scripts\Experimental\AttackAction.luac</code>.</p>
+<p>The name Crc is easier, that is calculated from the file name without extension. In the above example: <code>AttackAction</code>.</p>
+<p>Size and size2 seems to be the same, no idea why is there two sizes currently.</p>
 <h2 id="kaitai-formats"><a href="http://kaitai.io/">Kaitai</a> Formats</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
