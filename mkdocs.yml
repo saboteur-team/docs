@@ -13,6 +13,7 @@ nav:
       - Index: 'game/formats/index.md'
       - GameText: 'game/formats/gametext.md'
       - LooseFiles: 'game/formats/loosefiles.md'
+      - LuaScripts: 'game/formats/luap.md'
       - Megapack/Kilopack: 'game/formats/megapack.md'
       - France FSM: 'game/formats/france_fsm.md'
       - France FST: 'game/formats/france_fst.md'
