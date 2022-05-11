@@ -6,7 +6,7 @@ The path and name Crcs are easy to calculate. Let's say the file to be included 
 
 The name Crc is easier, that is calculated from the file name without extension. In the above example: `AttackAction`.
 
-Size and size2 seems to be the same, no idea why is there two sizes currently.
+Size and size2 seems to be the same, no idea why are there two sizes currently.
 
 ## [Kaitai](http://kaitai.io/) Formats
 
