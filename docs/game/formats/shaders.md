@@ -42,7 +42,6 @@ types:
   vertex_shader:
     seq:
       - id: fourcc
-        size: 4
         contents: "DHSV"
       - id: data
         type: shader_shared
@@ -87,6 +86,6 @@ types:
       - id: name
         type: str
         size: name_size
-      - id: unk1
+      - id: maybe_default_value
         type: u4
 ```
