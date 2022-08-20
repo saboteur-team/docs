@@ -19,17 +19,17 @@ seq:
     contents: "5IEH"
   - id: count
     type: u4
-  - id: unk_40
+  - id: max_grid_x
     type: u4
-  - id: unk_44
+  - id: max_grid_z
     type: u4
-  - id: unk_48
+  - id: grid_size
     type: f4
-  - id: unk_4c
+  - id: top_left_x
     type: f4
-  - id: unk_50
+  - id: top_left_y
     type: f4
-  - id: unk_54
+  - id: top_left_z
     type: f4
   - id: content
     type: hei1
@@ -50,16 +50,16 @@ types:
         type: f4
       - id: unk_48
         size: unk_32 * unk_36
-      - id: unk_0
+      - id: start_pos_x
         type: u4
-      - id: unk_4
+      - id: start_pos_y
         type: u4
-      - id: unk_8
+      - id: start_pos_z
         type: f4
-      - id: unk_16
+      - id: end_pos_x
         type: f4
-      - id: unk_20
+      - id: end_pos_y
         type: f4
-      - id: unk_24
+      - id: end_pos_z
         type: f4
 ```
