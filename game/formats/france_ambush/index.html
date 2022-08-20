@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Shaders - Saboteur Team Wiki</title>
+    <title>France HEI - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Shaders";
-        var mkdocs_page_input_path = "game/formats/shaders.md";
+        var mkdocs_page_name = "France HEI";
+        var mkdocs_page_input_path = "game/formats/france_ambush.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -76,7 +76,9 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_fst/">France FST</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Shaders</a>
+                <li class="toctree-l2"><a class="reference internal" href="../shaders/">Shaders</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">France HEI</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
         <ul>
@@ -85,8 +87,6 @@
         </ul>
     </li>
     </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_ambush/">France HEI</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_hei/">France Ambush</a>
                 </li>
@@ -120,7 +120,7 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Game &raquo;</li>
           <li>File formats &raquo;</li>
-      <li>Shaders</li>
+      <li>France HEI</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -129,97 +129,67 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="franceshaders">France.shaders</h1>
-<p><code>France.shaders</code> contains compiled shaders.</p>
+                <h1 id="franceambush">France.ambush</h1>
+<p><code>France.ambush</code> contains some AI will to fight data.</p>
 <p>To be extended!</p>
 <h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: france_shaders
-  file-extension: shaders
+  id: ambush
+  file-extension: ambush
   endian: le
   encoding: UTF-8
 seq:
   - id: fourcc
-    contents: &quot;RDHS&quot;
-  - id: pixel_shader_count
+    contents: &quot;I0LA&quot;
+  - id: count
     type: u4
-  - id: pixel_shaders
-    type: pixel_shader
+  - id: data
+    type: ambush_data
     repeat: expr
-    repeat-expr: pixel_shader_count
-  - id: vertex_shader_count
-    type: u4
-  - id: vertex_shaders
-    type: vertex_shader
-    repeat: expr
-    repeat-expr: vertex_shader_count
-  - id: unk_string
-    type: str
-    size: 258
+    repeat-expr: count
 types:
-  pixel_shader:
+  ambush_data:
     seq:
-      - id: fourcc
-        contents: &quot;DHSP&quot;
-      - id: data
-        type: shader_shared
-  vertex_shader:
-    seq:
-      - id: fourcc
-        contents: &quot;DHSV&quot;
-      - id: data
-        type: shader_shared
-  shader_shared:
-    seq:
-      - id: index
+      - id: id1
         type: u4
-      - id: has_data
+      - id: id2
         type: u4
-      - id: data
-        type: shader_data
-        if: has_data != 0
-  shader_data:
-    seq:
-      - id: shader_count
+      - id: unk1
         type: u4
-      - id: id
+      - id: unk2
         type: u4
-      - id: empty_chunk
-        type: shader_chunk
-        if: shader_count == 0
-      - id: shaders
-        type: shader_chunk
-        repeat: expr
-        repeat-expr: shader_count
-  shader_chunk:
-    seq:
-      - id: shader_size
-        type: u4
-      - id: shader_data
-        size: shader_size
-      - id: config_param_count
-        type: u4
-      - id: config_params
-        type: shader_config_param
-        repeat: expr
-        repeat-expr: config_param_count
-  shader_config_param:
-    seq:
-      - id: name_size
-        type: u4
-      - id: name
-        type: str
-        size: name_size
-      - id: maybe_default_value
-        type: u4
+      - id: pos_x
+        type: f4
+      - id: pos_y
+        type: f4
+      - id: pos_z
+        type: f4
+      - id: unk_float1
+        type: f4
+      - id: unk_float2
+        type: f4
+      - id: unk_float3
+        type: f4
+      - id: unk_float4
+        type: f4
+      - id: unk_float5
+        type: f4
+      - id: unk_float6
+        type: f4
+      - id: unk_float7
+        type: f4
+      - id: unk_float8
+        type: f4
+      - id: unk_float9
+        type: f4
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../france_fst/" class="btn btn-neutral float-left" title="France FST"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_ambush/" class="btn btn-neutral float-right" title="France HEI">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../shaders/" class="btn btn-neutral float-left" title="Shaders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../france_hei/" class="btn btn-neutral float-right" title="France Ambush">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -242,10 +212,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../france_fst/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../shaders/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_ambush/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../france_hei/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
