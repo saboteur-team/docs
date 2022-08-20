@@ -18,8 +18,9 @@ nav:
       - France FSM: 'game/formats/france_fsm.md'
       - France FST: 'game/formats/france_fst.md'
       - Shaders: 'game/formats/shaders.md'
-      - France HEI: 'game/formats/france_ambush.md'
-      - France Ambush: 'game/formats/france_hei.md'
+      - France HEI: 'game/formats/france_hei.md'
+      - France Ambush: 'game/formats/france_ambush.md'
+      - France Cinsplines: 'game/formats/france_cinsplines.md'
     - Lua: 'game/lua/index.md'
     - Versions: 'game/versions.md'
   - Tools:
