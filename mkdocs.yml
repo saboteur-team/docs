@@ -21,6 +21,7 @@ nav:
       - France HEI: 'game/formats/france_hei.md'
       - France Ambush: 'game/formats/france_ambush.md'
       - France Cinsplines: 'game/formats/france_cinsplines.md'
+      - France Defen: 'game/formats/france_defen.md'
     - Lua: 'game/lua/index.md'
     - Versions: 'game/versions.md'
   - Tools:
