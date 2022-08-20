@@ -2,7 +2,7 @@
 
 `France.shaders` contains compiled shaders.
 
-To be extended!.
+To be extended!
 
 ## [Kaitai](http://kaitai.io/) Format
 
