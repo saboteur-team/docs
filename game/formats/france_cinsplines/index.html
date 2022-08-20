@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>France Ambush - Saboteur Team Wiki</title>
+    <title>France Cinsplines - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "France Ambush";
-        var mkdocs_page_input_path = "game/formats/france_ambush.md";
+        var mkdocs_page_name = "France Cinsplines";
+        var mkdocs_page_input_path = "game/formats/france_cinsplines.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -80,7 +80,9 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_hei/">France HEI</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">France Ambush</a>
+                <li class="toctree-l2"><a class="reference internal" href="../france_ambush/">France Ambush</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">France Cinsplines</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
         <ul>
@@ -89,8 +91,6 @@
         </ul>
     </li>
     </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_cinsplines/">France Cinsplines</a>
                 </li>
     </ul>
                   </li>
@@ -122,7 +122,7 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Game &raquo;</li>
           <li>File formats &raquo;</li>
-      <li>France Ambush</li>
+      <li>France Cinsplines</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -131,67 +131,115 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="franceambush">France.ambush</h1>
-<p><code>France.ambush</code> contains some AI will to fight data.</p>
+                <h1 id="francecinsplines">France.cinsplines</h1>
+<p><code>France.cinsplines</code> contains some cinematic spline data (probably for camera movement).</p>
 <p>To be extended!</p>
 <h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: ambush
-  file-extension: ambush
+  id: cinematicsplines
+  file-extension: cinsplines
   endian: le
   encoding: UTF-8
 seq:
   - id: fourcc
-    contents: &quot;I0LA&quot;
+    contents: &quot;4LPS&quot;
   - id: count
     type: u4
   - id: data
-    type: ambush_data
+    type: cinema_spline
     repeat: expr
     repeat-expr: count
 types:
-  ambush_data:
+  cinema_spline:
     seq:
-      - id: id1
+      - id: name_crc
         type: u4
-      - id: id2
+      - id: distance
+        type: f4
+      - id: duration
+        type: f4
+      - id: parent_crc
         type: u4
-      - id: unk1
+      - id: object_crc
         type: u4
-      - id: unk2
-        type: u4
+      - id: pos_dir
+        type: u2
+      - id: despawn
+        type: u2
+      - id: pitch
+        type: u2
+      - id: gap
+        type: u2
+      - id: node_count
+        type: u2
+      - id: nodes
+        type: cinema_spline_node
+        repeat: expr
+        repeat-expr: node_count
+  cinema_spline_node:
+    seq:
+      - id: start_pos
+        type: f4
+      - id: distance
+        type: f4
+      - id: speed
+        type: f4
+      - id: start_time
+        type: f4
+      - id: duration
+        type: f4
       - id: pos_x
         type: f4
       - id: pos_y
         type: f4
       - id: pos_z
         type: f4
-      - id: unk_float1
+      - id: quat_x
         type: f4
-      - id: unk_float2
+      - id: quat_y
         type: f4
-      - id: unk_float3
+      - id: quat_z
         type: f4
-      - id: unk_float4
+      - id: quat_s
         type: f4
-      - id: unk_float5
+      - id: float_38
         type: f4
-      - id: unk_float6
+      - id: float_4c
         type: f4
-      - id: unk_float7
+      - id: float_40
         type: f4
-      - id: unk_float8
+      - id: float_48
         type: f4
-      - id: unk_float9
+      - id: float_5c
         type: f4
+      - id: float_50
+        type: f4
+      - id: float_58
+        type: f4
+      - id: float_6c
+        type: f4
+      - id: float_60
+        type: f4
+      - id: float_68
+        type: f4
+      - id: float_70
+        type: f4
+      - id: float_74
+        type: f4
+      - id: sub_count
+        type: u2
+      - id: float_array_7c
+        type: f4
+        repeat: expr
+        repeat-expr: sub_count
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../france_hei/" class="btn btn-neutral float-left" title="France HEI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_cinsplines/" class="btn btn-neutral float-right" title="France Cinsplines">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../france_ambush/" class="btn btn-neutral float-left" title="France Ambush"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../lua/" class="btn btn-neutral float-right" title="Lua">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -214,10 +262,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../france_hei/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../france_ambush/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_cinsplines/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../lua/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
