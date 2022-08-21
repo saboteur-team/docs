@@ -181,7 +181,6 @@ types:
           switch-on: type_crc
           cases:
             trigger_type::unknown: trigger_unknown
-            trigger_type::unknown2: trigger_unknown2
             trigger_type::sound_trigger: trigger_sound_trigger
             trigger_type::box: trigger_box
             trigger_type::zone: trigger_zone
@@ -200,10 +199,6 @@ types:
         repeat: expr
         repeat-expr: polygon_volume_count
       - id: unk
-        type: u4
-  trigger_unknown2:
-    seq:
-      - id: a
         type: u4
   trigger_sound_trigger:
     seq:
