@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>France Freeplay - Saboteur Team Wiki</title>
+    <title>France WaterFlow - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "France Freeplay";
-        var mkdocs_page_input_path = "game/formats/france_freeplay.md";
+        var mkdocs_page_name = "France WaterFlow";
+        var mkdocs_page_input_path = "game/formats/france_waterflow.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -80,15 +80,7 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_defen/">France Defen</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">France Freeplay</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#pc">PC</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                <li class="toctree-l2"><a class="reference internal" href="../france_freeplay/">France Freeplay</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_gpsgraph/">France GpsGraph</a>
                 </li>
@@ -108,7 +100,15 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_waterctrl/">France WaterCtrl</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_waterflow/">France WaterFlow</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">France WaterFlow</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#pc">PC</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_fsm/">France FSM</a>
                 </li>
@@ -146,7 +146,7 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Game &raquo;</li>
           <li>File formats &raquo;</li>
-      <li>France Freeplay</li>
+      <li>France WaterFlow</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -155,37 +155,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="francefreeplay">France.freeplay</h1>
-<p><code>France.freeplay</code> contains freeplay nodes on the map.</p>
+                <h1 id="francewaterflow">France.waterflow</h1>
+<p><code>France.waterflow</code> contains water flow data.</p>
 <p>To be extended!</p>
 <h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: france_freeplay
-  file-extension: freeplay
+  id: france_waterflow
+  file-extension: france_waterflow
   endian: le
   encoding: UTF-8
 seq:
   - id: fourcc
-    contents: &quot;40PF&quot;
+    contents: &quot;70FW&quot;
   - id: count
     type: u4
-  - id: gap1
-    type: u4
-  - id: data
-    type: sub_type_1
+  - id: water_flows
+    type: water_flow
     repeat: expr
     repeat-expr: count
 types:
-  sub_type_1:
+  water_flow:
     seq:
-      - id: unk_crc1
-        type: u4
-      - id: unk_crc2
-        type: u4
-      - id: unk_crc3
-        type: u4
-      - id: unk4
+      - id: name_crc
         type: u4
       - id: pos_x
         type: f4
@@ -193,19 +185,23 @@ types:
         type: f4
       - id: pos_z
         type: f4
-      - id: count
-        type: u4
-      - id: unk_crcs
-        type: u4
-        repeat: expr
-        repeat-expr: count
+      - id: quat_x
+        type: f4
+      - id: quat_y
+        type: f4
+      - id: quat_z
+        type: f4
+      - id: quat_s
+        type: f4
+      - id: unk8
+        type: f4
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../france_defen/" class="btn btn-neutral float-left" title="France Defen"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_gpsgraph/" class="btn btn-neutral float-right" title="France GpsGraph">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../france_waterctrl/" class="btn btn-neutral float-left" title="France WaterCtrl"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../france_fsm/" class="btn btn-neutral float-right" title="France FSM">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -228,10 +224,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../france_defen/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../france_waterctrl/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_gpsgraph/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../france_fsm/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
