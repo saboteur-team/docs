@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>France Paths - Saboteur Team Wiki</title>
+    <title>France Trigs - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "France Paths";
-        var mkdocs_page_input_path = "game/formats/france_paths.md";
+        var mkdocs_page_name = "France Trigs";
+        var mkdocs_page_input_path = "game/formats/france_trigs.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -92,7 +92,15 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_hqpoints/">France HQPoints</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">France Paths</a>
+                <li class="toctree-l2"><a class="reference internal" href="../france_paths/">France Paths</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../france_railway/">France Railway</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../france_rndnodes/">France RNDNodes</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../france_spore/">France Spore</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">France Trigs</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
         <ul>
@@ -101,14 +109,6 @@
         </ul>
     </li>
     </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_railway/">France Railway</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_rndnodes/">France RNDNodes</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_spore/">France Spore</a>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_trigs/">France Trigs</a>
                 </li>
     </ul>
                   </li>
@@ -140,7 +140,7 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Game &raquo;</li>
           <li>File formats &raquo;</li>
-      <li>France Paths</li>
+      <li>France Trigs</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -149,67 +149,283 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="francepaths">France.paths</h1>
-<p><code>France.paths</code> contains some AI paths. Could be patrolling NPCs paths?</p>
+                <h1 id="francetrigs">France.trigs</h1>
+<p><code>France.trigs</code> contains trigger zones.</p>
 <p>To be extended!</p>
 <h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: france_paths
-  file-extension: paths
+  id: france_trigs
+  file-extension: trigs
   endian: le
   encoding: UTF-8
 seq:
   - id: fourcc
-    contents: &quot;6HTP&quot;
-  - id: path_count
+    contents: &quot;JGRT&quot;
+  - id: trigger_count
     type: u4
-  - id: paths
-    type: scripted_path
+  - id: triggers
+    type: trigger
     repeat: expr
-    repeat-expr: path_count
+    repeat-expr: trigger_count
 types:
-  scripted_path:
+  trigger:
+    seq:
+      - id: type_crc
+        type: u4
+        enum: trigger_type
+      - id: data
+        type:
+          switch-on: type_crc
+          cases:
+            trigger_type::unknown: trigger_unknown
+            trigger_type::unknown2: trigger_unknown2
+            trigger_type::sound_trigger: trigger_sound_trigger
+            trigger_type::box: trigger_box
+            trigger_type::zone: trigger_zone
+            trigger_type::district: trigger_district
+            trigger_type::polygon: trigger_polygon
+  trigger_unknown:
     seq:
       - id: name_crc
         type: u4
-      - id: node_count
-        type: u4
-      - id: nodes
-        type: scripted_path_node
+      - id: height
+        type: f4
+      - id: polygon_volume_count
+        type: u2
+      - id: polygon_volumes
+        type: polygon_volume
         repeat: expr
-        repeat-expr: node_count
+        repeat-expr: polygon_volume_count
+      - id: unk
+        type: u4
+  trigger_unknown2:
+    seq:
+      - id: a
+        type: u4
+  trigger_sound_trigger:
+    seq:
+      - id: name_crc
+        type: u4
+      - id: sen_tag_crc
+        type: u4
+      - id: enabled
+        type: u2
+      - id: height
+        type: f4
+      - id: polygon_volume_count
+        type: u2
+      - id: polygon_volumes
+        type: polygon_volume
+        repeat: expr
+        repeat-expr: polygon_volume_count
+      - id: string_length
+        type: u2
+      - id: string
+        type: strz
+        size: string_length
+      - id: unk
+        type: u4
+      - id: sub1s
+        type: trigger_sound_trigger_sub1
+        repeat: expr
+        repeat-expr: 5
+      - id: unk2
+        type: f4
+      - id: unk3
+        type: f4
+      - id: sub2s
+        type: trigger_sound_trigger_sub2
+        repeat: expr
+        repeat-expr: 3
+      - id: sub1s2
+        type: trigger_sound_trigger_sub1
+        repeat: expr
+        repeat-expr: 4
+  trigger_sound_trigger_sub1:
+    seq:
+      - id: string_length
+        type: u2
+      - id: string
+        type: strz
+        size: string_length
+      - id: unk
+        type: u4
+  trigger_sound_trigger_sub2:
+    seq:
+      - id: sub3_count
+        type: u2
+      - id: sub3s
+        type: trigger_sound_trigger_sub3
+        repeat: expr
+        repeat-expr: sub3_count
+  trigger_sound_trigger_sub3:
+    seq:
+      - id: string_length
+        type: u2
+      - id: string
+        type: strz
+        size: string_length
+      - id: unk1
+        type: u4
+      - id: unk2
+        type: f4
+      - id: unk3
+        type: u1
+      - id: unk4
+        type: f4
+  trigger_box:
+    seq:
+      - id: name_crc
+        type: u4
+      - id: mat_0_x
+        type: f4
+      - id: mat_0_y
+        type: f4
+      - id: mat_0_z
+        type: f4
+      - id: mat_1_x
+        type: f4
+      - id: mat_1_y
+        type: f4
+      - id: mat_1_z
+        type: f4
+      - id: mat_2_x
+        type: f4
+      - id: mat_2_y
+        type: f4
+      - id: mat_2_z
+        type: f4
+      - id: mat_3_x
+        type: f4
+      - id: mat_3_y
+        type: f4
+      - id: mat_3_z
+        type: f4
+      - id: unk_x
+        type: f4
+      - id: unk_z
+        type: f4
+      - id: script_name_length
+        type: u2
+      - id: script_name
+        type: strz
+        size: script_name_length &gt; 128 ? 128 : script_name_length
+      - id: unkshort1
+        type: u2
+      - id: unkshort2
+        type: u2
+  trigger_zone:
+    seq:
+      - id: name_crc
+        type: u4
+      - id: height
+        type: f4
+      - id: polygon_volume_count
+        type: u2
+      - id: polygon_volumes
+        type: polygon_volume
+        repeat: expr
+        repeat-expr: polygon_volume_count
       - id: unk_count
         type: u4
       - id: unks
         type: u4
         repeat: expr
         repeat-expr: unk_count
-      - id: unkshort
+      - id: strings
+        type: trigger_zone_strings
+        repeat: expr
+        repeat-expr: 2
+      - id: unk6
+        type: u4
+      - id: unk7
         type: u2
-  scripted_path_node:
+  trigger_zone_strings:
     seq:
-      - id: pos_x
-        type: f4
-      - id: pos_y
-        type: f4
-      - id: pos_z
-        type: f4
-      - id: rotation
-        type: f4
+      - id: string1_length
+        type: u2
+      - id: string1
+        type: strz
+        size: string1_length &gt; 128 ? 128 : string1_length
+      - id: string2_length
+        type: u2
+      - id: string2
+        type: strz
+        size: string2_length &gt; 128 ? 128 : string2_length
+  trigger_district:
+    seq:
+      - id: name_crc
+        type: u4
       - id: unk1
-        type: f4
+        type: u1
       - id: unk2
         type: f4
-      - id: min_pause_time
+      - id: polygon_volume_count
+        type: u2
+      - id: polygon_volumes
+        type: polygon_volume
+        repeat: expr
+        repeat-expr: polygon_volume_count
+      - id: unk3
+        type: u4
+      - id: unk4
+        type: u2
+  trigger_polygon:
+    seq:
+      - id: name_crc
+        type: u4
+      - id: sen_tag_crc
+        type: u4
+      - id: enabled
+        type: u2
+      - id: height
         type: f4
+      - id: polygon_volume_count
+        type: u2
+      - id: polygon_volumes
+        type: polygon_volume
+        repeat: expr
+        repeat-expr: polygon_volume_count
+      - id: string_length
+        type: u2
+      - id: string
+        type: strz
+        size: string_length &gt; 128 ? 128 : string_length
+      - id: flags
+        type: u2
+  polygon_volume:
+    seq:
+      - id: point_count
+        type: u2
+      - id: points
+        type: vector3
+        repeat: expr
+        repeat-expr: point_count
+  vector3:
+    seq:
+      - id: x
+        type: f4
+      - id: y
+        type: f4
+      - id: z
+        type: f4
+enums:
+  trigger_type:
+    0x976F2D35: &quot;unknown&quot;
+    0x9C8E92D2: &quot;unknown2&quot;
+    0x9EE26816: &quot;sound_trigger&quot;
+    0xA0787FC8: &quot;box&quot;
+    0x0A0AFF97: &quot;zone&quot;
+    0xA13E6F5F: &quot;district&quot;
+    0xAF36A899: &quot;polygon&quot;
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../france_hqpoints/" class="btn btn-neutral float-left" title="France HQPoints"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_railway/" class="btn btn-neutral float-right" title="France Railway">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../france_spore/" class="btn btn-neutral float-left" title="France Spore"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../lua/" class="btn btn-neutral float-right" title="Lua">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -232,10 +448,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../france_hqpoints/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../france_spore/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_railway/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../lua/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
