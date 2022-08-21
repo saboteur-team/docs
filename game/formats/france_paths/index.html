@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>France HQPoints - Saboteur Team Wiki</title>
+    <title>France Paths - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "France HQPoints";
-        var mkdocs_page_input_path = "game/formats/france_hqpoints.md";
+        var mkdocs_page_name = "France Paths";
+        var mkdocs_page_input_path = "game/formats/france_paths.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -90,7 +90,9 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_gpsgraph/">France GpsGraph</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">France HQPoints</a>
+                <li class="toctree-l2"><a class="reference internal" href="../france_hqpoints/">France HQPoints</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">France Paths</a>
     <ul class="current">
     <li class="toctree-l3"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
         <ul>
@@ -99,8 +101,6 @@
         </ul>
     </li>
     </ul>
-                </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_paths/">France Paths</a>
                 </li>
     </ul>
                   </li>
@@ -132,7 +132,7 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Game &raquo;</li>
           <li>File formats &raquo;</li>
-      <li>France HQPoints</li>
+      <li>France Paths</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -141,53 +141,67 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="francehqpoints">France.hqpoints</h1>
-<p><code>France.hqpoints</code> contains HQ related data.</p>
+                <h1 id="francepaths">France.paths</h1>
+<p><code>France.paths</code> contains some AI paths. Could be patrolling NPCs paths?</p>
 <p>To be extended!</p>
 <h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: france_hqpoints
-  file-extension: hqpoints
+  id: france_paths
+  file-extension: paths
   endian: le
   encoding: UTF-8
 seq:
   - id: fourcc
-    contents: &quot;60PH&quot;
-  - id: count
+    contents: &quot;6HTP&quot;
+  - id: path_count
     type: u4
-  - id: hqs
-    type:  hq_point
+  - id: paths
+    type: scripted_path
     repeat: expr
-    repeat-expr: count
+    repeat-expr: path_count
 types:
-  hq_point:
+  scripted_path:
     seq:
       - id: name_crc
         type: u4
-      - id: game_text_id_crc
+      - id: node_count
         type: u4
-      - id: strlen1
-        type: u2
-      - id: interior_script_name1
-        type: strz
-        size: strlen1 &gt; 128 ? 128 : strlen1
-      - id: strlen2
-        type: u2
-      - id: interior_script_name2
-        type: strz
-        size: strlen2 &gt; 128 ? 128 : strlen2
-      - id: matrix
-        type: f4
+      - id: nodes
+        type: scripted_path_node
         repeat: expr
-        repeat-expr: 12
+        repeat-expr: node_count
+      - id: unk_count
+        type: u4
+      - id: unks
+        type: u4
+        repeat: expr
+        repeat-expr: unk_count
+      - id: unkshort
+        type: u2
+  scripted_path_node:
+    seq:
+      - id: pos_x
+        type: f4
+      - id: pos_y
+        type: f4
+      - id: pos_z
+        type: f4
+      - id: rotation
+        type: f4
+      - id: unk1
+        type: f4
+      - id: unk2
+        type: f4
+      - id: min_pause_time
+        type: f4
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../france_gpsgraph/" class="btn btn-neutral float-left" title="France GpsGraph"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_paths/" class="btn btn-neutral float-right" title="France Paths">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../france_hqpoints/" class="btn btn-neutral float-left" title="France HQPoints"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../lua/" class="btn btn-neutral float-right" title="Lua">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -210,10 +224,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../france_gpsgraph/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../france_hqpoints/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_paths/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../lua/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
