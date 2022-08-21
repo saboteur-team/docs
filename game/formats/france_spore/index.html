@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>GameText - Saboteur Team Wiki</title>
+    <title>France Spore - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "GameText";
-        var mkdocs_page_input_path = "game/formats/gametext.md";
+        var mkdocs_page_name = "France Spore";
+        var mkdocs_page_input_path = "game/formats/france_spore.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -64,17 +64,7 @@
     <ul class="current">
                 <li class="toctree-l2"><a class="reference internal" href="../">Index</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">GameText</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#kaitai-formats">Kaitai Formats</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#pc">PC</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#xbox-360-2008-beta">Xbox 360 2008 beta</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                <li class="toctree-l2"><a class="reference internal" href="../gametext/">GameText</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../loosefiles/">LooseFiles</a>
                 </li>
@@ -108,7 +98,15 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_rndnodes/">France RNDNodes</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_spore/">France Spore</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">France Spore</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#pc">PC</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
     </ul>
                   </li>
@@ -140,7 +138,7 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Game &raquo;</li>
           <li>File formats &raquo;</li>
-      <li>GameText</li>
+      <li>France Spore</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -149,124 +147,81 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="gametextdlg">GameText.dlg</h1>
-<p><code>GameText.dlg</code> contains various text strings for cutscenes, help texts and etc... On the PC version, you can find this file at <code>(Game Root)\Cinematics\Dialog\(Language)\GameText.dlg</code>.</p>
-<h2 id="kaitai-formats"><a href="http://kaitai.io/">Kaitai</a> Formats</h2>
+                <h1 id="francespore">France.spore</h1>
+<p><code>France.spore</code> contains human spawning data. MIGHT BE UNUSED!</p>
+<p>To be extended!</p>
+<h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: saboteur_dialog_text
-  title: Saboteur Dialog Text File
-  file-extension: dlg
+  id: france_spore
+  file-extension: spore
   endian: le
+  encoding: UTF-8
 seq:
-  - id: version
+  - id: fourcc
+    contents: &quot;I0SS&quot;
+  - id: spore_count
     type: u4
-  - id: base_entries
-    type: entry_array
-  - id: sub_entry_count
-    type: u4
-  - id: sub_entry_arrays
-    type: sub_entry
+  - id: spores
+    type: spore
     repeat: expr
-    repeat-expr: sub_entry_count
-  - id: sub_arrays
-    type: entry_array
-    repeat: expr
-    repeat-expr: sub_entry_count
+    repeat-expr: spore_count
 types:
-  entry_array:
+  spore:
     seq:
-      - id: entry_count
+      - id: name_crc
         type: u4
-      - id: total_char_count
+      - id: unk1_crc
         type: u4
-      - id: entries
-        type: dtxt_entry
+      - id: unk2_crc
+        type: u4
+      - id: unk3
+        type: f4
+      - id: unk4
+        type: f4
+      - id: unk5
+        type: f4
+      - id: unk6
+        type: f4
+      - id: unk7
+        type: f4
+      - id: unk8
+        type: f4
+      - id: unk9
+        type: f4
+      - id: unk10
+        type: f4
+      - id: unk11
+        type: f4
+      - id: unk12
+        type: f4
+      - id: unk13
+        type: f4
+      - id: unk14
+        type: f4
+      - id: unk15
+        type: u4
+      - id: unk16
+        type: u4
+      - id: fields
+        type: field
         repeat: expr
-        repeat-expr: entry_count
-      - id: end
-        contents: &quot;DNEC&quot;
-  dtxt_entry:
+        repeat-expr: unk16
+  field:
     seq:
-      - id: tag
-        contents: &quot;TXTD&quot;
-      - id: id
+      - id: name_crc
         type: u4
-      - id: voice_over_key_size
-        type: u2
-      - id: voice_over
-        type: str
-        encoding: UTF-8
-        size: voice_over_key_size
-      - id: text_size
-        type: u2
-      - id: text
-        type: str
-        encoding: UTF-16
-        size: text_size * 2
-  sub_entry:
-    seq:
-      - id: id
+      - id: size
         type: u4
-      - id: offset
-        type: u4
-</code></pre>
-<h3 id="xbox-360-2008-beta">Xbox 360 2008 beta</h3>
-<p>Note: All integers are in big endian! On the PC version they are little endian.</p>
-<pre><code class="language-yaml">meta:
-  id: dlg
-  title: Saboteur Dialog File
-  file-extension: dlg
-  endian: be
-seq:
-  - id: header
-    type: header
-  - id: entries
-    type: entry
-    repeat: eos
-types:
-  header:
-    seq:
-      - id: version
-        type: u4
-      - id: entries_count
-        type: u4
-      - id: total_char_count
-        type: u4
-  entry:
-    seq:
-      - id: tag_type
-        type: str
-        encoding: ASCII
-        size: 4
-      - id: body
-        type:
-          switch-on: tag_type
-          cases:
-            '&quot;DTXT&quot;': dtxt_entry
-  dtxt_entry:
-    seq:
-      - id: hash
-        size: 4
-      - id: key_size
-        type: u2
-      - id: key
-        type: str
-        encoding: ASCII
-        size: key_size
-      - id: value_size
-        type: u2
-      - id: value
-        type: str
-        encoding: ASCII
-        size: value_size
+      - id: data
+        size: size
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../" class="btn btn-neutral float-left" title="Index"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../loosefiles/" class="btn btn-neutral float-right" title="LooseFiles">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../france_rndnodes/" class="btn btn-neutral float-left" title="France RNDNodes"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../lua/" class="btn btn-neutral float-right" title="Lua">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -289,10 +244,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../france_rndnodes/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../loosefiles/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../lua/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
