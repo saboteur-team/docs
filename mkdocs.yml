@@ -29,6 +29,7 @@ nav:
       - France Railway: 'game/formats/france_railway.md'
       - France RNDNodes: 'game/formats/france_rndnodes.md'
       - France Spore: 'game/formats/france_spore.md'
+      - France Trigs: 'game/formats/france_trigs.md'
     - Lua: 'game/lua/index.md'
     - Versions: 'game/versions.md'
   - Tools:
