@@ -35,3 +35,4 @@ nav:
   - Tools:
     - Index: 'tools/index.md'
     - SabTool: 'tools/sabtool.md'
+    - FileConvTool: 'tools/fileconvtool.md'
