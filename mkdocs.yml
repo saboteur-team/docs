@@ -24,6 +24,7 @@ nav:
       - France Defen: 'game/formats/france_defen.md'
       - France Freeplay: 'game/formats/france_freeplay.md'
       - France GpsGraph: 'game/formats/france_gpsgraph.md'
+      - France HQPoints: 'game/formats/france_hqpoints.md'
     - Lua: 'game/lua/index.md'
     - Versions: 'game/versions.md'
   - Tools:
