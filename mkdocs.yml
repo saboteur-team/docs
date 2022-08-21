@@ -23,6 +23,7 @@ nav:
       - France Cinsplines: 'game/formats/france_cinsplines.md'
       - France Defen: 'game/formats/france_defen.md'
       - France Freeplay: 'game/formats/france_freeplay.md'
+      - France GpsGraph: 'game/formats/france_gpsgraph.md'
     - Lua: 'game/lua/index.md'
     - Versions: 'game/versions.md'
   - Tools:
