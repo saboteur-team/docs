@@ -26,6 +26,7 @@ nav:
       - France GpsGraph: 'game/formats/france_gpsgraph.md'
       - France HQPoints: 'game/formats/france_hqpoints.md'
       - France Paths: 'game/formats/france_paths.md'
+      - France Railway: 'game/formats/france_railway.md'
     - Lua: 'game/lua/index.md'
     - Versions: 'game/versions.md'
   - Tools:
