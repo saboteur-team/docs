@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>Megapack/Kilopack - Saboteur Team Wiki</title>
+    <title>France GpsGraph - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Megapack/Kilopack";
-        var mkdocs_page_input_path = "game/formats/megapack.md";
+        var mkdocs_page_name = "France GpsGraph";
+        var mkdocs_page_input_path = "game/formats/france_gpsgraph.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -70,19 +70,7 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../luap/">LuaScripts</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="./">Megapack/Kilopack</a>
-    <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#detail">Detail</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#formats">Formats</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#entry-header">Entry Header</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#file">File</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+                <li class="toctree-l2"><a class="reference internal" href="../megapack/">Megapack/Kilopack</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_fsm/">France FSM</a>
                 </li>
@@ -100,7 +88,15 @@
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="../france_freeplay/">France Freeplay</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="../france_gpsgraph/">France GpsGraph</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">France GpsGraph</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#pc">PC</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
     </ul>
                   </li>
@@ -132,7 +128,7 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Game &raquo;</li>
           <li>File formats &raquo;</li>
-      <li>Megapack/Kilopack</li>
+      <li>France GpsGraph</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -141,160 +137,96 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="megapack-kilopack">Megapack / Kilopack</h1>
-<h2 id="detail">Detail</h2>
-<p>The megapack file is just an archive file for storing different kind of assets. A megapack (or kilopack) stores pack files inside them. Different megapacks store different kind and amount of data.</p>
-<p>The data stored in megapacks can be:</p>
-<ul>
-<li>Models<ul>
-<li>Meshes</li>
-<li>Physics data</li>
-<li>Textures</li>
-<li>TODO: more</li>
-</ul>
-</li>
-</ul>
-<p>The megapack file format is a simple one: all the pack files are packed together inside a big file with a header specifying (for each file) the name, where they start and how big they are.</p>
-<h2 id="formats">Formats</h2>
-<h3 id="entry-header">Entry Header</h3>
-<table>
-<thead>
-<tr>
-<th>Offset</th>
-<th>Size</th>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>4</td>
-<td><a href="../../crc/">Crc</a></td>
-<td>Id</td>
-<td>File name's Crc</td>
-</tr>
-<tr>
-<td>4</td>
-<td>4</td>
-<td><a href="../../crc/">Crc</a></td>
-<td>Path</td>
-<td>File path's Crc</td>
-</tr>
-<tr>
-<td>8</td>
-<td>4</td>
-<td>u32</td>
-<td>Size</td>
-<td>File size</td>
-</tr>
-<tr>
-<td>12</td>
-<td>8</td>
-<td>u64</td>
-<td>Offset</td>
-<td>File offset inside the megapack</td>
-</tr>
-</tbody>
-</table>
-<h3 id="file">File</h3>
-<table>
-<thead>
-<tr>
-<th>Offset</th>
-<th>Size</th>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>4</td>
-<td>FourCC</td>
-<td>Magic</td>
-<td>The file's magic number "MP00"</td>
-</tr>
-<tr>
-<td>4</td>
-<td>4</td>
-<td>u32</td>
-<td>File count</td>
-<td>The number of embedded pack files</td>
-</tr>
-<tr>
-<td>8</td>
-<td>20</td>
-<td><a href="#entry-header">Entry header</a>[]</td>
-<td>File entries</td>
-<td>The header entries for the pack files</td>
-</tr>
-<tr>
-<td>8 + 20*Count</td>
-<td>8</td>
-<td>[<a href="../../crc/">Crc</a>, <a href="../../crc/">Crc</a>]</td>
-<td>Unk ids</td>
-<td>Unknown array containing <a href="../../crc/">Crc</a> pairs</td>
-</tr>
-<tr>
-<td>8 + 28*Count</td>
-<td>Varying</td>
-<td>byte[]</td>
-<td>File data</td>
-<td>Offset is padded to 0x800 byte boundary</td>
-</tr>
-</tbody>
-</table>
-<p><a href="http://kaitai.io/">Kaitai</a> structure definition:</p>
+                <h1 id="francegpsgraph">France.gpsgraph</h1>
+<p><code>France.gpsgraph</code> contains some GPS graphs.</p>
+<p>To be extended!</p>
+<h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
+<p>Notice: uncomplete structure and it's in BIG ENDIAN!</p>
+<h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: megapack
-  file-extension:
-    - megapack
-    - kilopack
-  endian: le
+  id: france_gpsgraph
+  file-extension: gpsgraph
+  endian: be
+  encoding: UTF-8
 seq:
-  - id: magic
-    contents: &quot;00PM&quot;
-  - id: file_entry_count
-    type: u4
-  - id: file_entries
-    type: file_entry
-    repeat: expr
-    repeat-expr: file_entry_count
-  - id: crc_pairs
-    type: crc_pair
-    repeat: expr
-    repeat-expr: file_entry_count
+  - id: fourcc
+    type: str
+    size: 4
+  - id: data_0
+    type: gps_graph_0
+    if: fourcc==&quot;GPS0&quot;
+  - id: data_1
+    type: gps_graph_1
+    if: fourcc==&quot;GPS1&quot;
 types:
-  file_entry:
+  gps_graph_0:
     seq:
-      - id: crc
-        type: u4
-      - id: unk_crc
-        type: u4
-      - id: size
-        type: u4
-      - id: offset
-        type: u8
-    instances:
-      data:
-        pos: offset
-        size: size
-  crc_pair:
+      - id: unk1
+        type: u2
+      - id: unk2
+        type: u2
+      #TODO
+  gps_graph_1:
     seq:
-      - id: crc1
-        type: u4
-      - id: crc2
-        type: u4
+      - id: unk_count1
+        type: u2
+      - id: unk2
+        type: u2
+      - id: unk_count3
+        type: u2
+      - id: sub1s
+        type: gps_graph_1_sub1
+        repeat: expr
+        repeat-expr: unk_count1
+      - id: sub2s
+        type: gps_graph_1_sub2
+        repeat: expr
+        repeat-expr: unk_count3
+      - id: unk4
+        type: u2
+      - id: unk5
+        type: u2
+      - id: unk6
+        type: u2
+      - id: unk7
+        type: u2
+      - id: unk8
+        type: u2
+      - id: unk9
+        type: u2
+      - id: data
+        type: u2
+        repeat: expr
+        repeat-expr: unk4 * unk5
+  gps_graph_1_sub1:
+    seq:
+      - id: unk1
+        type: u2
+      - id: unk2
+        type: u2
+      - id: unk_count3
+        type: u1
+      - id: data
+        type: u2
+        repeat: expr
+        repeat-expr: unk_count3
+  gps_graph_1_sub2:
+    seq:
+      - id: unkstring
+        type: strz
+      - id: unk_count
+        type: u2
+      - id: data
+        type: u2
+        repeat: expr
+        repeat-expr: unk_count
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../luap/" class="btn btn-neutral float-left" title="LuaScripts"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_fsm/" class="btn btn-neutral float-right" title="France FSM">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../france_freeplay/" class="btn btn-neutral float-left" title="France Freeplay"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../lua/" class="btn btn-neutral float-right" title="Lua">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -317,10 +249,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../luap/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../france_freeplay/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_fsm/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../lua/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
