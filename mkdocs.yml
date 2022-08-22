@@ -4,36 +4,67 @@ nav:
   - Home: index.md
   - Game:
     - Index: 'game/index.md'
+
     - Client:
       - Index: 'game/client/index.md'
       - Random Offsets: 'game/client/random_offsets.md'
+
     - Crc: 'game/crc.md'
+
     - Filesystem: 'game/filesystem.md'
+
     - File formats:
       - Index: 'game/formats/index.md'
-      - GameText: 'game/formats/gametext.md'
-      - LooseFiles: 'game/formats/loosefiles.md'
-      - LuaScripts: 'game/formats/luap.md'
-      - Megapack/Kilopack: 'game/formats/megapack.md'
-      - Shaders: 'game/formats/shaders.md'
-      - France Ambush: 'game/formats/france_ambush.md'
-      - France Cinsplines: 'game/formats/france_cinsplines.md'
-      - France Defen: 'game/formats/france_defen.md'
-      - France Freeplay: 'game/formats/france_freeplay.md'
-      - France GpsGraph: 'game/formats/france_gpsgraph.md'
-      - France HEI: 'game/formats/france_hei.md'
-      - France HQPoints: 'game/formats/france_hqpoints.md'
-      - France Paths: 'game/formats/france_paths.md'
-      - France Railway: 'game/formats/france_railway.md'
-      - France RNDNodes: 'game/formats/france_rndnodes.md'
-      - France Spore: 'game/formats/france_spore.md'
-      - France Trigs: 'game/formats/france_trigs.md'
-      - France WaterCtrl: 'game/formats/france_waterctrl.md'
-      - France WaterFlow: 'game/formats/france_waterflow.md'
-      - France FSM: 'game/formats/france_fsm.md'
-      - France FST: 'game/formats/france_fst.md'
+
+      #- Animations:
+      # - Animations pack: 'game/formats/animations.md'
+
+      - Loose files:
+        - LooseFiles pack: 'game/formats/loosefiles.md'
+        - France Ambush: 'game/formats/france_ambush.md'
+        - France Cinsplines: 'game/formats/france_cinsplines.md'
+        - France Defen: 'game/formats/france_defen.md'
+        - France Freeplay: 'game/formats/france_freeplay.md'
+        - France GpsGraph: 'game/formats/france_gpsgraph.md'
+        - France HEI: 'game/formats/france_hei.md'
+        - France HQPoints: 'game/formats/france_hqpoints.md'
+        - France Paths: 'game/formats/france_paths.md'
+        - France Railway: 'game/formats/france_railway.md'
+        - France RNDNodes: 'game/formats/france_rndnodes.md'
+        - France Spore: 'game/formats/france_spore.md'
+        - France Trigs: 'game/formats/france_trigs.md'
+        - France WaterCtrl: 'game/formats/france_waterctrl.md'
+        - France WaterFlow: 'game/formats/france_waterflow.md'
+        - France FSM: 'game/formats/france_fsm.md'
+        - France FST: 'game/formats/france_fst.md'
+
+      - Cinematics:
+      # - Complex animations: 'game/formats/complexanimations.md'
+        - GameText: 'game/formats/gametext.md'
+
+      #- GameTemplates: 'game/formats/gametemplates.md'
+
+      - Graphics:
+      # - Materials: 'game/formats/materials.md'
+        - Shaders: 'game/formats/shaders.md'
+      # - Particle pack: 'game/formats/particle.md'
+
+      - Packs:
+        - EditNodes: 'game/formats/editnodes.md'
+      # - France map: 'game/formats/france_map.md'
+      # - Global map: 'game/formats/global_map.md'
+        - Megapack/Kilopack: 'game/formats/megapack.md'
+      # - Dynpacks: 'game/formats/dynpacks.md'
+      # - Palettepacks: 'game/formats/palettepacks.md'
+      # - Packs: 'game/formats/packs.md'
+
+      - Lua:
+        - LuaScripts: 'game/formats/luap.md'
+
     - Lua: 'game/lua/index.md'
+    
     - Versions: 'game/versions.md'
+
   - Tools:
     - Index: 'tools/index.md'
     - SabTool: 'tools/sabtool.md'
