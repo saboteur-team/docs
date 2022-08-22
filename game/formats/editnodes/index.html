@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>LooseFiles pack - Saboteur Team Wiki</title>
+    <title>EditNodes - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "LooseFiles pack";
-        var mkdocs_page_input_path = "game/formats/loosefiles.md";
+        var mkdocs_page_name = "EditNodes";
+        var mkdocs_page_input_path = "game/formats/editnodes.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -64,17 +64,9 @@
     <ul class="current">
                 <li class="toctree-l2"><a class="reference internal" href="../">Index</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">Loose files</a>
-    <ul class="current">
-                <li class="toctree-l3 current"><a class="reference internal current" href="./">LooseFiles pack</a>
-    <ul class="current">
-    <li class="toctree-l4"><a class="reference internal" href="#detail">Detail</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#content">Content</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#format">Format</a>
-    </li>
-    </ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Loose files</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../loosefiles/">LooseFiles pack</a>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../france_ambush/">France Ambush</a>
                 </li>
@@ -122,9 +114,13 @@
                 </li>
     </ul>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="#">Packs</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../editnodes/">EditNodes</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Packs</a>
+    <ul class="current">
+                <li class="toctree-l3 current"><a class="reference internal current" href="./">EditNodes</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
+    </li>
+    </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../megapack/">Megapack/Kilopack</a>
                 </li>
@@ -168,8 +164,8 @@
     <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Game &raquo;</li>
           <li>File formats &raquo;</li>
-          <li>Loose files &raquo;</li>
-      <li>LooseFiles pack</li>
+          <li>Packs &raquo;</li>
+      <li>EditNodes</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -178,70 +174,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="loosefiles">LooseFiles</h1>
-<h2 id="detail">Detail</h2>
-<p>The <a href="../../filesystem/#looseFiles"><em>France\looseFiles_BinPC.pack</em></a> file is a very simple container of files. The idea with this could have been to bundle up a few loose files for easier reading. There are multiple loose files still in the game folder, so the reason why this file doesn't contain all of them is not known.</p>
-<h2 id="content">Content</h2>
-<ul>
-<li>Cinematics/Conversations/Conversations.cnvpack</li>
-<li>Cinematics/Cinematics.cinpack</li>
-<li>France/EditNodes/EditNodes.pack</li>
-<li>France.map</li>
-<li>France.shaders</li>
-<li>GameTemplates.wsd</li>
-<li>global.map</li>
-</ul>
-<h2 id="format">Format</h2>
-<table>
-<thead>
-<tr>
-<th>Offset</th>
-<th>Size</th>
-<th>Type</th>
-<th>Name</th>
-<th>Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>4</td>
-<td><a href="../../crc/">Crc</a></td>
-<td>Unknown</td>
-<td>Unknown <a href="../../crc/">Crc</a>.</td>
-</tr>
-<tr>
-<td>4</td>
-<td>4</td>
-<td>u32</td>
-<td>Size</td>
-<td>The size of the file</td>
-</tr>
-<tr>
-<td>8</td>
-<td>120</td>
-<td>string</td>
-<td>Name</td>
-<td>The nullterminated name of the file.</td>
-</tr>
-<tr>
-<td>128</td>
-<td>Varying</td>
-<td>byte[]</td>
-<td>Data</td>
-<td>The bytes of the file</td>
-</tr>
-</tbody>
-</table>
-<p>The next entry comes after the first's data array, with the same format,
-but the start the header is aligned to 0x10 byte boundary. This format has no specific file entry count value, fully reading must be while the input file is not over.</p>
-<p>Reading a specific file can be done with reading the header, checking for the file name, then skipping the data of the file and the byte boundary and checking the next header.</p>
+                <h1 id="editnodespack">EditNodes.pack</h1>
+<p><code>EditNodes.pack</code> contains a small header and some file data for yet unknown reasons.</p>
+<p>To be extended!</p>
+<h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
+<h3 id="pc">PC</h3>
+<pre><code class="language-yaml">meta:
+  id: editnodes
+  file-extension: pack
+  endian: le
+  encoding: UTF-8
+seq:
+  - id: fourcc
+    contents: &quot;00ED&quot;
+  - id: count
+    type: u4
+  - id: nodes
+    type: editnode
+    repeat: expr
+    repeat-expr: count
+types:
+  editnode:
+    seq:
+      - id: crc
+        type: u4
+      - id: length
+        type: u4
+      - id: offset
+        type: u4
+    instances:
+      data:
+        pos: offset
+        size: length
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../" class="btn btn-neutral float-left" title="Index"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_ambush/" class="btn btn-neutral float-right" title="France Ambush">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../shaders/" class="btn btn-neutral float-left" title="Shaders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../megapack/" class="btn btn-neutral float-right" title="Megapack/Kilopack">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -264,10 +235,10 @@ but the start the header is aligned to 0x10 byte boundary. This format has no sp
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../shaders/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_ambush/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../megapack/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
