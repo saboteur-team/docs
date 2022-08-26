@@ -19,7 +19,7 @@ seq:
     contents: "40PF"
   - id: count
     type: u4
-  - id: gap1
+  - id: total_count_subitems
     type: u4
   - id: data
     type: sub_type_1
