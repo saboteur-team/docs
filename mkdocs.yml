@@ -42,6 +42,7 @@ nav:
       - Cinematics:
       # - Complex animations: 'game/formats/complexanimations.md'
         - GameText: 'game/formats/gametext.md'
+        - POV: 'game/formats/pov.md'
 
       #- GameTemplates: 'game/formats/gametemplates.md'
 

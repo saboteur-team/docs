@@ -15,9 +15,9 @@
 |Cinematics/Dialog/[language]/GameText.dlg|Game dialog texts for the given language|
 |DLC/01/|The first DLC's root folder|
 |FaceFX/|Face effects?|
-|logs/|Log files|
 |Recordings/|Voice over recordings|
 |Sound/|WWise soundbank packs|
+|*.pov|Bink movie [POV files](formats/pov.md)|
 |ai.ini||
 |Animations.pack||
 |data01.bin||
@@ -89,4 +89,3 @@
 ## DLC
 
 ### DLC Root
-
