@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>France WaterCtrl - Saboteur Team Wiki</title>
+    <title>POV - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "France WaterCtrl";
-        var mkdocs_page_input_path = "game/formats/france_waterctrl.md";
+        var mkdocs_page_name = "POV";
+        var mkdocs_page_input_path = "game/formats/pov.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -63,8 +63,8 @@
     <ul class="current">
                 <li class="toctree-l2"><a class="reference internal" href="../">Index</a>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">Loose files</a>
-    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="#">Loose files</a>
+    <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../loosefiles/">LooseFiles pack</a>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../france_ambush/">France Ambush</a>
@@ -93,11 +93,7 @@
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../france_trigs/">France Trigs</a>
                 </li>
-                <li class="toctree-l3 current"><a class="reference internal current" href="./">France WaterCtrl</a>
-    <ul class="current">
-    <li class="toctree-l4"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
-    </li>
-    </ul>
+                <li class="toctree-l3"><a class="reference internal" href="../france_waterctrl/">France WaterCtrl</a>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../france_waterflow/">France WaterFlow</a>
                 </li>
@@ -107,11 +103,13 @@
                 </li>
     </ul>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="#">Cinematics</a>
-    <ul>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Cinematics</a>
+    <ul class="current">
                 <li class="toctree-l3"><a class="reference internal" href="../gametext/">GameText</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" href="../pov/">POV</a>
+                <li class="toctree-l3 current"><a class="reference internal current" href="./">POV</a>
+    <ul class="current">
+    </ul>
                 </li>
     </ul>
                 </li>
@@ -167,8 +165,8 @@
     <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Game</li>
           <li class="breadcrumb-item">File formats</li>
-          <li class="breadcrumb-item">Loose files</li>
-      <li class="breadcrumb-item active">France WaterCtrl</li>
+          <li class="breadcrumb-item">Cinematics</li>
+      <li class="breadcrumb-item active">POV</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -177,48 +175,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="francewaterctrl">France.waterctrl</h1>
-<p><code>France.waterctrl</code> contains water control points.</p>
+                <h1 id="hashpov">hash.pov</h1>
+<p><code>hash.pov</code> contains a random looking array of bytes. Seems unused, except the first 4 bytes being XOR checked sometimes when loading a bink video.</p>
+<p>The name of the pov file is the hex representation off the crc of the name of the bink video file (without Bink\ folder and .bik extension)!</p>
+<p>Point of view files? The data doesn't make sense yet, no real usage of it is visible in the client.</p>
+<p>Current known files:</p>
+<ul>
+<li>1a379030.pov - Ambient_FP</li>
+<li>1deb021a.pov - 217_CinB_Box</li>
+<li>5a6f13c7.pov - 201_CinA_3Months</li>
+<li>7af1786c.pov - 115_CinA_Cheat</li>
+<li>8f76445f.pov - Sab_Placeholder</li>
+<li>18bbb35e.pov - 121_CinA_Question</li>
+<li>32b0bc3e.pov - saboteur_de</li>
+<li>68a394ac.pov - saboteur</li>
+<li>955a92d4.pov - 221_CinA_BlimpCrash</li>
+<li>2721ff0b.pov - 408_CinB_DoppBoom</li>
+<li>74003e52.pov - 127_CinA_Intro</li>
+<li>ab1625b5.pov - 407_cinb_flashback</li>
+<li>cb9cb9cf.pov - 333_CinA_RaceBoom</li>
+</ul>
 <p>To be extended!</p>
-<h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
-<h3 id="pc">PC</h3>
-<pre><code class="language-yaml">meta:
-  id: france_waterctrl
-  file-extension: waterctrl
-  endian: le
-  encoding: UTF-8
-seq:
-  - id: fourcc
-    contents: &quot;70CW&quot;
-  - id: count
-    type: u4
-  - id: controls
-    type: water_control
-    repeat: expr
-    repeat-expr: count
-types:
-  water_control:
-    seq:
-      - id: name_crc
-        type: u4
-      - id: pos_x
-        type: f4
-      - id: pos_y
-        type: f4
-      - id: pos_z
-        type: f4
-      - id: unk_size
-        type: u4
-      - id: unk_data
-        size: unk_size
-        doc: blua structure, but it's always empty
-</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../france_trigs/" class="btn btn-neutral float-left" title="France Trigs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_waterflow/" class="btn btn-neutral float-right" title="France WaterFlow">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../gametext/" class="btn btn-neutral float-left" title="GameText"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../shaders/" class="btn btn-neutral float-right" title="Shaders">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -241,10 +224,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../france_trigs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../gametext/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_waterflow/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../shaders/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
