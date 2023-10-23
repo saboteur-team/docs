@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>EditNodes - Saboteur Team Wiki</title>
+    <title>settings.dat - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "EditNodes";
-        var mkdocs_page_input_path = "game/formats/editnodes.md";
+        var mkdocs_page_name = "settings.dat";
+        var mkdocs_page_input_path = "game/formats/settingsdat.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -63,9 +63,13 @@
     <ul class="current">
                 <li class="toctree-l2"><a class="reference internal" href="../">Index</a>
                 </li>
-                <li class="toctree-l2"><a class="reference internal" href="#">Local game data</a>
-    <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../settingsdat/">settings.dat</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Local game data</a>
+    <ul class="current">
+                <li class="toctree-l3 current"><a class="reference internal current" href="./">settings.dat</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
+    </li>
+    </ul>
                 </li>
     </ul>
                 </li>
@@ -125,13 +129,9 @@
                 </li>
     </ul>
                 </li>
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">Packs</a>
-    <ul class="current">
-                <li class="toctree-l3 current"><a class="reference internal current" href="./">EditNodes</a>
-    <ul class="current">
-    <li class="toctree-l4"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
-    </li>
-    </ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Packs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../editnodes/">EditNodes</a>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../megapack/">Megapack/Kilopack</a>
                 </li>
@@ -175,8 +175,8 @@
     <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Game</li>
           <li class="breadcrumb-item">File formats</li>
-          <li class="breadcrumb-item">Packs</li>
-      <li class="breadcrumb-item active">EditNodes</li>
+          <li class="breadcrumb-item">Local game data</li>
+      <li class="breadcrumb-item active">settings.dat</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -185,45 +185,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="editnodespack">EditNodes.pack</h1>
-<p><code>EditNodes.pack</code> contains a small header and some file data for yet unknown reasons.</p>
+                <h1 id="settingsdat">settings.dat</h1>
+<p><code>ettings.dat</code> contains unknown settings values.</p>
 <p>To be extended!</p>
 <h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: editnodes
-  file-extension: pack
+  id: settings_dat
+  file-extension: dat
   endian: le
-  encoding: UTF-8
 seq:
-  - id: fourcc
-    contents: &quot;00ED&quot;
-  - id: count
-    type: u4
-  - id: nodes
-    type: editnode
-    repeat: expr
-    repeat-expr: count
-types:
-  editnode:
-    seq:
-      - id: crc
-        type: u4
-      - id: length
-        type: u4
-      - id: offset
-        type: u4
-    instances:
-      data:
-        pos: offset
-        size: length
+  - id: version
+    type: u1
+  - id: unk1
+    type: u1
+  - id: unk2
+    type: u1
+  - id: unkf1
+    type: f4
+  - id: unkf2
+    type: f4
+  - id: unkf3
+    type: f4
+  - id: unk3
+    type: u1
+  - id: unk4
+    type: u1
+  - id: unk5
+    type: u1
+  - id: unk6
+    type: u1
+  - id: unk7
+    type: u1
+  - id: unk8
+    type: u1
+  - id: unk9
+    type: u1
+  - id: unk10
+    type: u1
+  - id: unk11
+    type: u1
+  - id: unk12
+    type: u1
+  - id: unk13
+    type: u1
+  - id: unkf4
+    type: f4
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../shaders/" class="btn btn-neutral float-left" title="Shaders"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../megapack/" class="btn btn-neutral float-right" title="Megapack/Kilopack">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../" class="btn btn-neutral float-left" title="Index"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../data01bin/" class="btn btn-neutral float-right" title="data01.bin">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -246,10 +260,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../shaders/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../megapack/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../data01bin/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
