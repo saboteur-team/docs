@@ -4,7 +4,7 @@
 
 The name of the pov file is the hex representation off the crc of the name of the bink video file (without Bink\ folder and .bik extension)!
 
-Point of view files? The data doesn't make sense yet, no real usage of it is visible in the client.
+Point of view files? The data doesn't make sense yet, no real usage of it is visible in the client. Only the first 128 bytes are loaded in the client.
 
 Current known files:
 

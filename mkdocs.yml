@@ -20,6 +20,7 @@ nav:
       # - Animations pack: 'game/formats/animations.md'
 
       - Loose files:
+        - data01.bin: 'game/formats/data01bin.md'
         - LooseFiles pack: 'game/formats/loosefiles.md'
         - France Ambush: 'game/formats/france_ambush.md'
         - France Cinsplines: 'game/formats/france_cinsplines.md'
@@ -38,11 +39,11 @@ nav:
         - France WaterFlow: 'game/formats/france_waterflow.md'
         - France FSM: 'game/formats/france_fsm.md'
         - France FST: 'game/formats/france_fst.md'
+        - POV: 'game/formats/pov.md'
 
       - Cinematics:
       # - Complex animations: 'game/formats/complexanimations.md'
         - GameText: 'game/formats/gametext.md'
-        - POV: 'game/formats/pov.md'
 
       #- GameTemplates: 'game/formats/gametemplates.md'
 
