@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../../img/favicon.ico" />
-    <title>France Map - Saboteur Team Wiki</title>
+    <title>data01.bin - Saboteur Team Wiki</title>
     <link rel="stylesheet" href="../../../css/theme.css" />
     <link rel="stylesheet" href="../../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "France Map";
-        var mkdocs_page_input_path = "game/formats/france_map.md";
+        var mkdocs_page_name = "data01.bin";
+        var mkdocs_page_input_path = "game/formats/data01bin.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -65,7 +65,11 @@
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="#">Loose files</a>
     <ul class="current">
-                <li class="toctree-l3"><a class="reference internal" href="../data01bin/">data01.bin</a>
+                <li class="toctree-l3 current"><a class="reference internal current" href="./">data01.bin</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
+    </li>
+    </ul>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../loosefiles/">LooseFiles pack</a>
                 </li>
@@ -83,11 +87,7 @@
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../france_hqpoints/">France HQPoints</a>
                 </li>
-                <li class="toctree-l3 current"><a class="reference internal current" href="./">France Map</a>
-    <ul class="current">
-    <li class="toctree-l4"><a class="reference internal" href="#kaitai-format">Kaitai Format</a>
-    </li>
-    </ul>
+                <li class="toctree-l3"><a class="reference internal" href="../france_map/">France Map</a>
                 </li>
                 <li class="toctree-l3"><a class="reference internal" href="../france_paths/">France Paths</a>
                 </li>
@@ -170,7 +170,7 @@
           <li class="breadcrumb-item">Game</li>
           <li class="breadcrumb-item">File formats</li>
           <li class="breadcrumb-item">Loose files</li>
-      <li class="breadcrumb-item active">France Map</li>
+      <li class="breadcrumb-item active">data01.bin</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -179,187 +179,66 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="francemap">France.map</h1>
-<p><code>France.map</code> contains information about the map.</p>
-<p>To be extended!</p>
+                <h1 id="data01bin">data01.bin</h1>
+<p><code>data01.bin</code> contains a random looking array of bytes. Seems unused, except the first 12 bytes being XOR checked when the UI loads.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Size</th>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>4</td>
+<td>u32</td>
+<td>Offset</td>
+<td>The offset to read the data from (should be 0 on PC)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>u32</td>
+<td>XOR base</td>
+<td>The base value being XORed (should be 0 on PC)</td>
+</tr>
+<tr>
+<td>Offset * 4 + 8</td>
+<td>4</td>
+<td>u32</td>
+<td>XOR check</td>
+<td>The value being checked by the XOR (should be 0x21B87FA8 on PC)</td>
+</tr>
+</tbody>
+</table>
+<p>If the [XOR check] value equals [XOR base] ^ 0x1557F8D2 then some knife throatcat steah kill stuff is being set up.</p>
+<p>Other data in the file seems unused.</p>
 <h2 id="kaitai-format"><a href="http://kaitai.io/">Kaitai</a> Format</h2>
 <h3 id="pc">PC</h3>
 <pre><code class="language-yaml">meta:
-  id: france_map
-  file-extension: map
+  id: data01
+  file-extension: bin
   endian: le
-  encoding: UTF-8
 seq:
-  - id: magic
-    contents: &quot;6PAM&quot;
-  - id: level_name
-    type: strz
-  - id: num_palettes
+  - id: offset
     type: u4
-  - id: da84
+  - id: xor_base
     type: u4
-  - id: debug_starting_position_count
+instances:
+  xor_check:
+    pos: offset * 4 + 8
     type: u4
-  - id: debug_starting_position_unk
-    type: u4
-    if: debug_starting_position_count &gt; 0
-  - id: debug_starting_positions
-    type: debug_starting_position
-    repeat: expr
-    repeat-expr: debug_starting_position_count
-  - id: extent_low
-    type: extent
-  - id: extent_med
-    type: extent
-  - id: extent_high
-    type: extent
-  - id: grid_size_low
-    type: grid_size
-  - id: grid_size_med
-    type: grid_size
-  - id: grid_size_high
-    type: grid_size
-  - id: palettes
-    type: block
-    repeat: expr
-    repeat-expr: num_palettes
-  - id: num_interiors
-    type: u4
-  - id: interiors
-    type: block
-    repeat: expr
-    repeat-expr: num_interiors
-  - id: num_cinematics
-    type: u4
-  - id: cinematics
-    type: block
-    repeat: expr
-    repeat-expr: num_cinematics
-types:
-  debug_starting_position:
-    seq:
-      - id: name_length
-        type: u4
-      - id: name
-        type: strz
-      - id: str_length
-        type: u4
-      - id: str
-        type: str
-        size: str_length
-      - id: position
-        type: vector3
-      - id: x_axis
-        type: vector3
-      - id: y_axis
-        type: vector3
-      - id: z_axis
-        type: vector3
-      - id: script_length
-        type: u4
-      - id: script_name
-        type: str
-        size: script_length
-  extent:
-    seq:
-      - id: min
-        type: vector3
-      - id: max
-        type: vector3
-  grid_size:
-    seq:
-      - id: x
-        type: u2
-      - id: z
-        type: u2
-  block:
-    seq:
-      - id: id
-        type: u4
-      - id: file_name_length
-        type: u2
-      - id: file_name
-        type: str
-        size: file_name_length
-        if: file_name_length &gt; 0
-      - id: extents
-        type: extent
-      - id: unk_short
-        type: u2
-      - id: index
-        type: u2
-      - id: block_data
-        type: block_data
-        if: index == 2
-  block_data:
-    seq:
-      - id: num_textures
-        type: u4
-      - id: textures
-        type: texture
-        repeat: expr
-        repeat-expr: num_textures
-      - id: num_textures2
-        type: u4
-      - id: textures2
-        type: texture
-        repeat: expr
-        repeat-expr: num_textures2
-      - id: unk
-        type: u4
-      - id: entry_counts
-        type: u4
-        repeat: expr
-        repeat-expr: 9
-      - id: num_unk_2
-        type: u4
-      - id: unk2s
-        type: u4
-        repeat: expr
-        repeat-expr: num_unk_2
-      - id: num_palettes
-        type: u4
-      - id: palettes
-        type: u4
-        repeat: expr
-        repeat-expr: num_palettes
-      - id: num_fences
-        type: u4
-      - id: fences
-        type: fence
-        repeat: expr
-        repeat-expr: num_fences
-  fence:
-    seq:
-      - id: crc
-        type: u4
-      - id: value_count
-        type: u4
-      - id: values
-        type: u4
-        repeat: expr
-        repeat-expr: value_count
-  texture:
-    seq:
-      - id: crc
-        type: u4
-      - id: size
-        type: u4
-  vector3:
-    seq:
-      - id: x
-        type: f4
-      - id: y
-        type: f4
-      - id: z
-        type: f4
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../france_hqpoints/" class="btn btn-neutral float-left" title="France HQPoints"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../france_paths/" class="btn btn-neutral float-right" title="France Paths">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../" class="btn btn-neutral float-left" title="Index"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../loosefiles/" class="btn btn-neutral float-right" title="LooseFiles pack">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -382,10 +261,10 @@ types:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../france_hqpoints/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../france_paths/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../loosefiles/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
