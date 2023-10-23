@@ -16,6 +16,9 @@ nav:
     - File formats:
       - Index: 'game/formats/index.md'
 
+      - Local game data:
+        - settings.dat: 'game/formats/settingsdat.md'
+
       #- Animations:
       # - Animations pack: 'game/formats/animations.md'
 

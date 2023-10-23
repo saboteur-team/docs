@@ -1,10 +1,6 @@
 # Filesystem
 
-## Main
-
-|Name|Description|
-|-|-|
-|||
+## Basegame
 
 ### /
 
@@ -18,9 +14,9 @@
 |Recordings/|Voice over recordings|
 |Sound/|WWise soundbank packs|
 |*.pov|Bink movie [POV files](formats/pov.md)|
-|ai.ini||
-|Animations.pack||
-|data01.bin||
+|ai.ini|Ini file that contains parameters to change the behavior of the AI in the game.|
+|Animations.pack|Animations metadata and compressed Havok animations container.|
+|data01.bin|Small barely used data file that has something to do with knife cutthroat stealth kills|
 |France.ambush||
 |France.cinsplines||
 |France.defen||
@@ -44,6 +40,7 @@
 |particle.pack||
 |particle.tuv||
 |Saboteur.exe|The game's executable|
+|SAVE_START.profile|[Profile file](formats/profile.md)|
 |SoundBanks.ini||
 |startlocs.ini||
 |tuner.txt||
@@ -89,3 +86,11 @@
 ## DLC
 
 ### DLC Root
+
+## Documents/My Games/The Saboteur
+
+### /SaveGames
+
+|Name|Description|
+|-|-|
+|settings.dat|[Settings dat](formats/settingsdat.md)|
